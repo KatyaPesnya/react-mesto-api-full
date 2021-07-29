@@ -1,0 +1,14 @@
+.profile__overlay {
+    position: relative;
+    margin: auto;
+    border-radius: 50%;
+  }
+  
+  .profile__overlay::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }

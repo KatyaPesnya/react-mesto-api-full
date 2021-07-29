@@ -1,0 +1,15 @@
+.header__address {
+font-family: 'Inter', Arial, sans-serif;
+font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #fff;
+  padding: 0;
+}
+@media (min-width: 768px) {
+    .header__address {  
+        margin-right: 24px ;     
+    } 
+}

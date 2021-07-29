@@ -1,0 +1,19 @@
+.header__container {
+  display: none;
+  text-align: center;
+  margin: 0 auto;
+  padding: 3px 0 31px 0;
+  align-items: center;
+  padding-top: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .header__container {
+
+    padding: 0;
+    margin: 0;
+    display: flex;
+ justify-content: space-between;
+    align-items: flex-end;
+  }
+}

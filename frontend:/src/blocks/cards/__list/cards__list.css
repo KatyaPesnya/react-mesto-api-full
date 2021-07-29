@@ -1,0 +1,28 @@
+.cards__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .cards__list {
+    display: grid;
+    -ms-grid-columns: repeat(2, 282px);
+    grid-template-columns: repeat(2, 282px);
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-column-gap: 17px;
+    grid-row-gap: 20px;
+    justify-content: center;
+  }
+}
+@media (min-width: 1280px) {
+  .cards__list {
+    -ms-grid-columns: repeat(3, 282px);
+    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
+  }
+}

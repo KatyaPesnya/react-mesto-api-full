@@ -1,0 +1,24 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 123px 19px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+  
+}
+.overlay:last-of-type{
+  background-color: rgba(0, 0, 0, 0.9);
+}
+@media (min-width: 1280px) {
+  .overlay {
+    padding: 195px 425px;
+  }
+}

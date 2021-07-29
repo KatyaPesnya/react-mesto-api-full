@@ -1,0 +1,25 @@
+.register__input {
+  border: 0;
+  border-bottom: 2px solid #cccccc;
+  background-color: black;
+  margin: 10px;
+  padding-bottom: 13px;
+  width: 260px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16,94px;
+  font-family: "Inter", Arial, sans-serif;
+  color: #FFF;
+}
+
+.register__input::placeholder {
+  color:#cccccc;
+}
+
+@media (min-width: 768px){
+  .register__input {
+    width: 358px;
+   
+  }
+
+}

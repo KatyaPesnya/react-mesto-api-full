@@ -1,0 +1,28 @@
+.header__navlink{
+font-family: 'Inter', Arial, sans-serif;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 17px;
+color: #fff;
+text-decoration: unset;
+transition: opacity .3s ease;
+text-align: right;
+padding-right: 30px;
+
+
+}
+
+.header__navlink:hover{
+
+    opacity: .6;
+}
+
+@media screen and (min-width: 768px) {
+    .header__navlink{
+font-size: 18px;
+line-height: 22px;
+
+
+    }
+}

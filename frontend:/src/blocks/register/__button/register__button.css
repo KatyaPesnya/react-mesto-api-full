@@ -1,0 +1,13 @@
+.register__button{
+  width: 260px;
+  height: 46px;
+  margin: 173px auto 20px auto;
+}
+
+@media (min-width: 768px){
+    .register__button{ 
+        width: 358px;
+        height: 50px; 
+        margin: 216px auto 15px auto;
+    }
+}

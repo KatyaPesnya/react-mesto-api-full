@@ -1,0 +1,13 @@
+.login__button{
+  width: 260px;
+  height: 46px;
+  margin: 173px auto 77px auto;
+}
+
+@media (min-width: 768px){
+    .login__button{ 
+        width: 358px;
+        height: 50px; 
+        margin: 216px auto 112px auto;
+    }
+}
