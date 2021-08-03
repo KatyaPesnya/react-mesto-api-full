@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+export const BASE_URL = "https://mesto.pesnya.nomoredomains.club/";
 
 const checkResponse = (response) => {
   return response.ok

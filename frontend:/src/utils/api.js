@@ -10,18 +10,24 @@
         }
         return Promise.reject(`Ошибка ${res.status}`);
     }
-    getData() {
-        return Promise.all([this.getUserInfo(), this.getCards()]);
+    getData(token) {
+        return Promise.all([this.getUserInfo(token), this.getCards()]);
     }
-    getCards() {
+    getCards(token) {
         return fetch(`${this._url}/cards`, {
-             headers: this._headers })
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              }, })
             .then(this._checkResponse)
     }
-    createCard(data) {
+    createCard(data, token) {
         return fetch(`${this._url}/cards`, {
             method: 'POST',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
             body: JSON.stringify({
                 name: data.name,
                 link: data.link
@@ -29,32 +35,42 @@
         })
             .then(this._checkResponse)
     }
-    deleteCard(id) {
+    deleteCard(id, token) {
         return fetch(`${this._url}/cards/${id}`, {
             method: 'DELETE',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
         })
             .then(this._checkResponse)
     }
 
-    getUserInfo() {
+    getUserInfo(token) {
         return fetch(`${this._url}/users/me`, {
-            headers: this._headers,
+            method: 'GET',
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
         })
             .then(this._checkResponse)
     }
-   changeLikeCardStatus(id, isLiked) {
+   changeLikeCardStatus(id, isLiked, token) {
      if (isLiked) {
-       return this.setLike(id);
+       return this.setLike(id, token);
      } else {
-       return this.deleteLike(id);
+       return this.deleteLike(id, token);
      }
    }
 
-    setUserInfo(data) {
+    setUserInfo(data, token) {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
             body: JSON.stringify({
                 name: data.name,
                 about: data.about
@@ -62,10 +78,13 @@
         })
             .then(this._checkResponse)
     }
-    setUserAvatar(data) {
+    setUserAvatar(data, token) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
             body: JSON.stringify({
                 avatar: data.avatar
               })
@@ -73,26 +92,32 @@
             .then(this._checkResponse)
     }
 
-    setLike(id) {
+    setLike(id, token) {
         return fetch(`${this._url}/cards/likes/${id}`, {
             method: 'PUT',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
         })
             .then(this._checkResponse)
     }
-    deleteLike(id) {
+    deleteLike(id, token) {
         return fetch(`${this._url}/cards/likes/${id}`, {
             method: 'DELETE',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`
+              },
         })
             .then(this._checkResponse)
     }
 }
 
  const api = new Api({
-     url: 'https://mesto.nomoreparties.co/v1/cohort-21',
+     url: 'https://mesto.pesnya.nomoredomains.club/',
      headers: {
-     Authorization: '8bc2b522-b2e5-4475-a3df-8cf1760d3928',
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
   }

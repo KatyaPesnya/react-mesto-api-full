@@ -21,6 +21,7 @@ import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const [token, setToken] = React.useState('');
   const [cards, setCards] = useState([]);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -40,7 +41,7 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
-      .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, !isLiked, token)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -53,7 +54,7 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then(() => {
         setCards((state) => state.filter((c) => c !== card));
       })
@@ -63,7 +64,7 @@ function App() {
   }
   function handleAddPlaceSubmit(data) {
     api
-      .createCard(data)
+      .createCard(data, token)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -74,8 +75,8 @@ function App() {
   }
 
     useEffect(() => {
-    api
-      .getCards()
+      const token = localStorage.getItem('jwt');
+      api.getCards(token)
       .then((data) => {
         setCards(data);
       })
@@ -85,8 +86,8 @@ function App() {
   }, []);
 
     useEffect(() => {
-    api
-      .getUserInfo()
+      const token = localStorage.getItem('jwt');
+      api.getUserInfo(token)
       .then((data) => {
         setCurrentUser(data);
       })
@@ -125,7 +126,7 @@ function App() {
   }
   function handleUpdateUser(data) {
     api
-      .setUserInfo(data)
+      .setUserInfo(data, token)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -136,7 +137,7 @@ function App() {
   }
   function handleUpdateAvatar(data) {
     api
-      .setUserAvatar(data)
+      .setUserAvatar(data, token)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -165,6 +166,7 @@ function App() {
       (data) => {
         setLoggedIn(true);
         localStorage.setItem("jwt", data.token);
+        setToken(data.token);
         history.push("/");
       })
       .catch((err) => {
@@ -175,6 +177,7 @@ function App() {
   function handleSignOut() {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
+    setToken('');
     history.push("/sign-in");
   }
 
@@ -186,6 +189,7 @@ function App() {
       (data) => {
         setLoggedIn(true);
         setAuthorizationEmail(data.data.email);
+        setToken(token);
         history.push("/");
       })
       .catch((err) => {
