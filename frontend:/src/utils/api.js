@@ -11,7 +11,7 @@
         return Promise.reject(`Ошибка ${res.status}`);
     }
     getData(token) {
-        return Promise.all([this.getUserInfo(token), this.getCards()]);
+        return Promise.all([this.getUserInfo(token), this.getCards(token)]);
     }
     getCards(token) {
         return fetch(`${this._url}/cards`, {
@@ -115,7 +115,7 @@
 }
 
  const api = new Api({
-     url: 'https://mesto.pesnya.nomoredomains.club/',
+     url: 'https://mesto.pesnya.nomoredomains.club',
      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
