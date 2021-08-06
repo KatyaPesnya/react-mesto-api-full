@@ -12,6 +12,9 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const app = express();
+const { PORT = 3000 } = process.env;
+
 const allowedCors = [
   'https://mesto.pesnya.nomoredomains.club',
   'http://mesto.pesnya.nomoredomains.club',
@@ -30,10 +33,6 @@ const randomString = crypto
 
 console.log(randomString);
 require('dotenv').config();
-
-// console.log(process.env.NODE_ENV);
-const app = express();
-const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
