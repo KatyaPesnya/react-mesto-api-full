@@ -16,6 +16,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const allowedCors = [
   'https://mesto.pesnya.nomoredomains.club',
   'http://mesto.pesnya.nomoredomains.club',
+  'https://api.mesto.pesnya.nomoredomains.club',
+  'http://api.mesto.pesnya.nomoredomains.club',
   'localhost:3000',
 ];
 
