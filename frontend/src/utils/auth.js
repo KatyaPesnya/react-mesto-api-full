@@ -1,4 +1,4 @@
-export const BASE_URL = "https://mesto.pesnya.nomoredomains.club";
+export const BASE_URL = "https://api.mesto.pesnya.nomoredomains.club";
 
 const checkResponse = (response) => {
   return response.ok
