@@ -115,7 +115,7 @@
 }
 
  const api = new Api({
-     url: 'https://mesto.pesnya.nomoredomains.club',
+     url: 'https://api.mesto.pesnya.nomoredomains.club',
      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
