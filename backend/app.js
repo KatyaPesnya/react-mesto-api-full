@@ -4,23 +4,21 @@ const helmet = require('helmet');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const crypto = require('crypto'); // экспортируем crypto
-// const cors = require('cors');
+const cors = require('cors');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const corsHandler = require('./middlewares/corsHandler');
+// const corsHandler = require('./middlewares/corsHandler');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 const { PORT = 3000 } = process.env;
 
-app.use(corsHandler);
+// app.use(corsHandler);
 
-// app.use(cors({
-// origin: allowedCors,
-// }));
+app.use(cors());
 
 const randomString = crypto
   .randomBytes(16) // сгенерируем случайную последовательность 16 байт (128 бит)

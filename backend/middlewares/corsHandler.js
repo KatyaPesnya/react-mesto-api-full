@@ -5,12 +5,12 @@ const allowedCors = [
   'http://api.mesto.pesnya.nomoredomains.club',
   'localhost:3000',
 ];
-// Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
+
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 module.exports = ((req, res, next) => {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  const { method } = req; // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную
+  const { origin } = req.headers;
+  const { method } = req;
 
   // сохраняем список заголовков исходного запроса
   const requestHeaders = req.headers['access-control-request-headers'];
