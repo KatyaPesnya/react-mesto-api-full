@@ -79,7 +79,7 @@ function App() {
     }
   }, [loggedIn])
   
-  function handleUpdateUser(data) { //ok
+  function handleUpdateUser(data) { 
     api
       .setUserInfo(data, token)
       .then((res) => {
@@ -90,7 +90,7 @@ function App() {
         console.log(err);
       });
   }
-  function handleUpdateAvatar(data) { //ok
+  function handleUpdateAvatar(data) { 
     api
       .setUserAvatar(data, token)
       .then((res) => {
@@ -101,28 +101,6 @@ function App() {
         console.log(err);
       });
   }
-//   useEffect(() => {
-//     const token = localStorage.getItem('jwt');
-//     api.getCards(token)
-//     .then((data) => {
-//       setCards(data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }, []);
-
-//   useEffect(() => {
-//     const token = localStorage.getItem('jwt');
-//     api.getUserInfo(token)
-//     .then((data) => {
-//       setCurrentUser(data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }, []);
-
 
   function handleCardLike(card) {
    
@@ -139,7 +117,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });   //ok
+      });   
   }
 
   function handleCardDelete(card) {
@@ -151,7 +129,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });  //ok
+      });  
   }
   function handleAddPlaceSubmit(data) {
     api
@@ -163,7 +141,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }  //ok
+  }  
 
   function register(data) {
     auth.register(data).then(
@@ -176,7 +154,7 @@ function App() {
         console.log(err);
         setIsSuccess(false);
         handleInfoToolTipOpen();
-        })  //ok
+        })  
   }
 
   function login(data) {
@@ -190,10 +168,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })  //ok
+      })  
   }
 
-  function handleSignOut() {  //проверено
+  function handleSignOut() {  
     setLoggedIn(false);
     localStorage.removeItem("jwt");
     setToken('');
@@ -228,14 +206,6 @@ function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
   }
-
-  //   useEffect(() => {
-  //     const token = localStorage.getItem("jwt");
-  //   if (token) {
-  //     checkToken();
-  //   }
-  // }, [checkToken]);
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

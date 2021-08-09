@@ -117,7 +117,7 @@
 }
 
  const api = new Api({
-     url: 'http://localhost:3000',
+     url: 'https://api.mesto.pesnya.nomoredomains.club',
      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -125,4 +125,3 @@
   }
 )
  export default  api;
-// 'https://api.mesto.pesnya.nomoredomains.club'
