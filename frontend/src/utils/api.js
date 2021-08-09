@@ -93,7 +93,7 @@
     }
 
     setLike(id, token) {
-        return fetch(`${this._url}/cards/likes/${id}`, {
+        return fetch(`${this._url}/cards/${id}/likes`, {
             method: 'PUT',
             headers: {
                 ...this._headers,
@@ -103,12 +103,14 @@
             .then(this._checkResponse)
     }
     deleteLike(id, token) {
-        return fetch(`${this._url}/cards/likes/${id}`, {
+        console.log('DELETE')
+        return fetch(`${this._url}/cards/${id}/likes`, {
             method: 'DELETE',
             headers: {
                 ...this._headers,
                 Authorization: `Bearer ${token}`
               },
+                
         })
             .then(this._checkResponse)
     }
