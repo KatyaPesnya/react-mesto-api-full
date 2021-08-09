@@ -9,14 +9,11 @@ const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-// const corsHandler = require('./middlewares/corsHandler');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 const { PORT = 3000 } = process.env;
-
-// app.use(corsHandler);
 
 app.use(cors());
 
