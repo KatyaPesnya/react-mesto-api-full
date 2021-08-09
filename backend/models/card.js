@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isURL } = require('validator');
 
 const cardSchema = new mongoose.Schema({
   name: { // имя карточки
@@ -9,7 +10,11 @@ const cardSchema = new mongoose.Schema({
   },
   link: { // ссылка на картинку
     type: String,
-    required: true,
+    required: [true, "Поле 'link' должно быть заполнено."],
+    validate: {
+      validator: (v) => isURL(v),
+      message: 'Ошибка валидации url адреса',
+    },
   },
   owner: { // ссылка на модель аватара карточки
     type: mongoose.Schema.Types.ObjectId,
