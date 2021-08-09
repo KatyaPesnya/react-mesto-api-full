@@ -36,6 +36,94 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
 
+
+  const checkToken = React.useCallback(
+    () => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      setToken(token);
+
+    auth.checkToken(token)
+    .then((res) => {
+      if (res) {
+        setLoggedIn(true);
+        setAuthorizationEmail(res.email);
+        history.push("/");
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }, 
+  [history]
+  );
+
+  useEffect(() => {
+    checkToken();
+  }, [checkToken])
+
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
+      api.getData(token)
+        .then((res) => {
+          const [userData, cardsData] = res;
+          setCurrentUser(userData);
+          setCards(cardsData);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [loggedIn])
+  
+  function handleUpdateUser(data) { //ok
+    api
+      .setUserInfo(data, token)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function handleUpdateAvatar(data) { //ok
+    api
+      .setUserAvatar(data, token)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+//   useEffect(() => {
+//     const token = localStorage.getItem('jwt');
+//     api.getCards(token)
+//     .then((data) => {
+//       setCards(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }, []);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem('jwt');
+//     api.getUserInfo(token)
+//     .then((data) => {
+//       setCurrentUser(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }, []);
+
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -49,7 +137,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });   //ok
   }
 
   function handleCardDelete(card) {
@@ -57,10 +145,11 @@ function App() {
       .deleteCard(card._id, token)
       .then(() => {
         setCards((state) => state.filter((c) => c !== card));
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
-      });
+      });  //ok
   }
   function handleAddPlaceSubmit(data) {
     api
@@ -72,29 +161,42 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }  //ok
+
+  function register(data) {
+    auth.register(data).then(
+      (data) => {
+        setIsSuccess(true);
+        handleInfoToolTipOpen();
+        history.push("/sign-in");
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsSuccess(false);
+        handleInfoToolTipOpen();
+        })  //ok
   }
 
-    useEffect(() => {
-      const token = localStorage.getItem('jwt');
-      api.getCards(token)
-      .then((data) => {
-        setCards(data);
+  function login(data) {
+    auth.autorize(data).then(
+      (res) => {
+        setLoggedIn(true);
+        localStorage.setItem("jwt", res.token);
+        setToken(res.token);
+        setAuthorizationEmail(data.email)
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
-      });
-  }, []);
+      })  //ok
+  }
 
-    useEffect(() => {
-      const token = localStorage.getItem('jwt');
-      api.getUserInfo(token)
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  function handleSignOut() {  //проверено
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    setToken('');
+    history.push("/sign-in");
+  }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -124,86 +226,13 @@ function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
   }
-  function handleUpdateUser(data) {
-    api
-      .setUserInfo(data, token)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function handleUpdateAvatar(data) {
-    api
-      .setUserAvatar(data, token)
-      .then((data) => {
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
-  function register(data) {
-    auth.register(data).then(
-      (data) => {
-        setIsSuccess(true);
-        handleInfoToolTipOpen();
-        history.push("/sign-in");
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsSuccess(false);
-        handleInfoToolTipOpen();
-        })
-  }
-
-  function login(data) {
-    auth.autorize(data).then(
-      (data) => {
-        setLoggedIn(true);
-        localStorage.setItem("jwt", data.token);
-        setToken(data.token);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function handleSignOut() {
-    setLoggedIn(false);
-    localStorage.removeItem("jwt");
-    setToken('');
-    history.push("/sign-in");
-  }
-
-  const checkToken = React.useCallback(() => {
-    
-    const token = localStorage.getItem("jwt");
-
-    auth.checkToken(token).then(
-      (data) => {
-        setLoggedIn(true);
-        setAuthorizationEmail(data.data.email);
-        setToken(token);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      }
-    );
-  }, [history]);
-
-    useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken();
-    }
-  }, [checkToken]);
+  //   useEffect(() => {
+  //     const token = localStorage.getItem("jwt");
+  //   if (token) {
+  //     checkToken();
+  //   }
+  // }, [checkToken]);
 
 
   return (
