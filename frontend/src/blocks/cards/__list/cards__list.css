@@ -11,18 +11,19 @@
 @media (min-width: 768px) {
   .cards__list {
     display: grid;
+    padding-top: 40px;
     -ms-grid-columns: repeat(2, 282px);
     grid-template-columns: repeat(2, 282px);
-    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-template-rows: repeat(2, 282px);
     grid-column-gap: 17px;
-    grid-row-gap: 20px;
-    justify-content: center;
+    grid-row-gap: 20px; 
+    justify-content: center; 
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .cards__list {
     -ms-grid-columns: repeat(3, 282px);
-    grid-template-columns: repeat(3, minmax(min-content, max-content));
-    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-template-columns: repeat(3, 282px);
+    grid-template-rows: repeat(3, 282px);
   }
 }

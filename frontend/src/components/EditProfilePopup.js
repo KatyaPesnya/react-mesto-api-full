@@ -11,13 +11,13 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [props.isOpen]);
+  }, [currentUser, props.isOpen]);
 
-  React.useEffect(() => {
-    setName('');
-    setDescription('')
-  }, [currentUser, props.isOpen]) 
-
+  // React.useEffect(() => {
+  //   setName('');
+  //   setDescription('')
+  // }, [ props.isOpen]) 
+ 
   function handleSubmit(e) {
     e.preventDefault();
     props.onUpdateUser({
