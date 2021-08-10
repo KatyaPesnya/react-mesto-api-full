@@ -8,4 +8,3 @@
 ## Как найти сайт
 
 https://mesto.pesnya.nomoredomains.club/
-
