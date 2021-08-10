@@ -19,10 +19,10 @@
     
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .cards__list {
     -ms-grid-columns: repeat(3, 282px);
-    grid-template-columns: repeat(3, 361px);
+    grid-template-columns: repeat(3, 282px);
     grid-template-rows: repeat(2, 361px);
   }
 }
