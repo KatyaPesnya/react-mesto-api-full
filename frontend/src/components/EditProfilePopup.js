@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -10,12 +11,12 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser, props.isOpen]);
+  }, [props.isOpen]);
 
   React.useEffect(() => {
     setName('');
     setDescription('')
-  }, [props.isOpen]) 
+  }, [currentUser, props.isOpen]) 
 
   function handleSubmit(e) {
     e.preventDefault();
