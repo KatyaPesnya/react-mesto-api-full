@@ -16,6 +16,7 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 app.use(cors());
+app.options('*', cors());
 
 const randomString = crypto
   .randomBytes(16) // сгенерируем случайную последовательность 16 байт (128 бит)
