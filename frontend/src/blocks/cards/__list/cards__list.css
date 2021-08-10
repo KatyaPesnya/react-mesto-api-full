@@ -5,7 +5,7 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(1, 282px);
-  grid-template-rows: repeat(1, minmax(min-content, max-content));
+  grid-template-rows: repeat(1, 361px);
   justify-content: center;
 }
 
@@ -13,7 +13,7 @@
   .cards__list {
     -ms-grid-columns: repeat(2, 282px);
     grid-template-columns: repeat(2, 282px);
-    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-template-rows: repeat(2, 361px);
     grid-column-gap: 17px;
     grid-row-gap: 20px;
     
@@ -22,7 +22,7 @@
 @media (min-width: 1280px) {
   .cards__list {
     -ms-grid-columns: repeat(3, 282px);
-    grid-template-columns: repeat(3, minmax(min-content, max-content));
-    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    grid-template-columns: repeat(3, 361px);
+    grid-template-rows: repeat(2, 361px);
   }
 }
